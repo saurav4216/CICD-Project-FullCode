@@ -56,8 +56,8 @@ jobs:
         type: choice
         values: [10, 20, 30, 50]
       max_depth:
-        type: _______  # Specify the type for max_depth
-        values: _______  # Provide the values for max_depth
+        type: choice  # Specify the type for max_depth
+        values: [3, 5, 7]  # Provide the values for max_depth
     objective:
       goal: minimize
       primary_metric: MSE
