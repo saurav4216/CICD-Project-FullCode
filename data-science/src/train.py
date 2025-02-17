@@ -17,8 +17,6 @@ def parse_args():
 
     parser = argparse.ArgumentParser("train")
     
-    # -------- WRITE YOUR CODE HERE --------
-    
     # Step 1: Define arguments for train data, test data, model output, and RandomForest hyperparameters. Specify their types and defaults.  
     parser = argparse.ArgumentParser("train")
     parser.add_argument("--train_data", type=str, help="Path to train dataset")
@@ -26,11 +24,9 @@ def parse_args():
     parser.add_argument("--model_output", type=str, help="Path of output model")
     parser.add_argument('--n_estimators', type=int, default=100,
                         help='The number of trees in the forest')
-    parser.add_argument('--max_depth', type=int, default=None,
+    parser.add_argument('--max_depth', type=int, default=5,
                         help='The maximum depth of the tree. If None, then nodes are expanded until all the leaves contain less than min_samples_split samples.'
-
-    args = parser.parse_args()
-
+    args = parser.parse_args()      
     return args
 
 def main(args):
@@ -43,10 +39,10 @@ def main(args):
     test_df = pd.read_csv(Path(args.test_data)/"test.csv")
 
     # Step 3: Split the data into features (X) and target (y) for both train and test datasets. Specify the target column name.  
-    y_train = train_df['price'].values  # Specify the target column
-    X_train = train_df.drop(columns=['price']).values
-    y_test = test_df['price'].values
-    X_test = test_df.drop(columns=['price']).values
+    y_train = train_df['price']
+    X_train = train_df.drop(columns=['price'])
+    y_test = test_df['price']
+    X_test = test_df.drop(columns=['price'])
 
     # Step 4: Initialize the RandomForest Regressor with specified hyperparameters, and train the model using the training data.  
     model = RandomForestRegressor(n_estimators=args.n_estimators, max_depth=args.max_depth, random_state=42)  # Provide the arguments for RandomForestRegressor
