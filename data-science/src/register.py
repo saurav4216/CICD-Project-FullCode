@@ -58,7 +58,7 @@ if __name__ == "__main__":
     lines = [
         f"Model name: {args.model_name}",
         f"Model path: {args.model_path}",
-        f"Model info output path: {args.model_info_output_pat}"
+        f"Model info output path: {args.model_info_output_path}"
     ]
 
     for line in lines:
