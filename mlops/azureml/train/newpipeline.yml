@@ -59,9 +59,9 @@ jobs:
       goal: minimize
       primary_metric: MSE
     limits:
-      max_total_trials: 20
-      max_concurrent_trials: 10
-      timeout: 7200
+      max_total_trials: 15
+      max_concurrent_trials: 5
+      timeout: 14400
 
 
   register_model:
