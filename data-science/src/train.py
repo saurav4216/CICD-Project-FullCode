@@ -18,14 +18,15 @@ def parse_args():
     parser = argparse.ArgumentParser("train")
     
     # Step 1: Define arguments for train data, test data, model output, and RandomForest hyperparameters. Specify their types and defaults.  
-    parser = argparse.ArgumentParser("train")
+    
     parser.add_argument("--train_data", type=str, help="Path to train dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
     parser.add_argument("--model_output", type=str, help="Path of output model")
     parser.add_argument('--n_estimators', type=int, default=100,
                         help='The number of trees in the forest')
     parser.add_argument('--max_depth', type=int, default=5,
-                        help='The maximum depth of the tree. If None, then nodes are expanded until all the leaves contain less than min_samples_split samples.'
+                        help='The maximum depth of the tree.'
+                        
     args = parser.parse_args()      
     return args
 
