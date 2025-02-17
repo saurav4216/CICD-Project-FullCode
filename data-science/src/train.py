@@ -15,7 +15,7 @@ from matplotlib import pyplot as plt
 def parse_args():
     '''Parse input arguments'''
 
-   parser = argparse.ArgumentParser("train")
+    parser = argparse.ArgumentParser("train")
     
     # Step 1: Define arguments for train data, test data, model output, and RandomForest hyperparameters. Specify their types and defaults.  
     
@@ -30,10 +30,8 @@ def parse_args():
     return args
 
 def main(args):
-    '''Read train and test datasets, train model, evaluate model, save trained model'''
-
-    # -------- WRITE YOUR CODE HERE --------
-
+    '''Read train and test datasets, train model, evaluate model, save trained model'''   
+    
     # Step 2: Read the train and test datasets from the provided paths using pandas. Replace '_______' with appropriate file paths and methods.  
     train_df = pd.read_csv(Path(args.train_data)/"train.csv")
     test_df = pd.read_csv(Path(args.test_data)/"test.csv")
