@@ -3,7 +3,6 @@
 """
 Trains ML model using training dataset and evaluates using test dataset. Saves trained model.
 """
-
 import argparse
 from pathlib import Path
 import pandas as pd
@@ -16,19 +15,18 @@ from matplotlib import pyplot as plt
 def parse_args():
     '''Parse input arguments'''
 
-    parser = argparse.ArgumentParser("train")
+   parser = argparse.ArgumentParser("train")
     
     # Step 1: Define arguments for train data, test data, model output, and RandomForest hyperparameters. Specify their types and defaults.  
     
     parser.add_argument("--train_data", type=str, help="Path to train dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
     parser.add_argument("--model_output", type=str, help="Path of output model")
-    parser.add_argument('--n_estimators', type=int, default=100,
-                        help='The number of trees in the forest')
-    parser.add_argument('--max_depth', type=int, default=5,
-                        help='The maximum depth of the tree.')
-                        
-    args = parser.parse_args()    
+    parser.add_argument('--n_estimators', type=int, default=100, help='The number of trees in the forest')
+    parser.add_argument('--max_depth', type=int, default=5, help='The maximum depth of the tree')
+
+    args = parser.parse_args()
+
     return args
 
 def main(args):
