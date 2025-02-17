@@ -11,6 +11,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import mlflow
 import mlflow.sklearn
+from matplotlib import pyplot as plt
 
 def parse_args():
     '''Parse input arguments'''
@@ -25,9 +26,9 @@ def parse_args():
     parser.add_argument('--n_estimators', type=int, default=100,
                         help='The number of trees in the forest')
     parser.add_argument('--max_depth', type=int, default=5,
-                        help='The maximum depth of the tree.'
+                        help='The maximum depth of the tree.')
                         
-    args = parser.parse_args()      
+    args = parser.parse_args()    
     return args
 
 def main(args):
