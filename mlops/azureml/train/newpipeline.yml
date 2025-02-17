@@ -1,21 +1,18 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
-display_name: used_cars_training_pipeline  
-experiment_name: used-cars-training  
-description: Training Pipeline to predict used cars pricing using Random Forest regressor  
+display_name: used_cars_training_pipeline
+experiment_name: used-cars-training
+description: Training Pipeline to predict used cars pricing using Random Forest regressor
 
 inputs:
-  raw_data:
+  input:
     type: uri_file
     path: azureml:used-cars-data@latest
 
 outputs:
   train_data:
-    type:
   test_data:
-    type:
   model_info_output_path:
-    type:
 
 settings:
   default_datastore: azureml:workspaceblobstore
@@ -28,10 +25,10 @@ jobs:
     display_name:prep-data
     code: ../../../data-science/src
     command: >-
-      python prep.py  
-      --raw_data ${{inputs.raw_data}} 
+      python prep.py
+      --raw_data ${{inputs.raw_data}}
       --train_data ${{outputs.train_data}}
-      --test_data ${{outputs.test_data}} 
+      --test_data ${{outputs.test_data}}
     environment: azureml:used-cars-train-env@latest
     inputs:
       raw_data: ${{parent.inputs.input}}
@@ -41,7 +38,7 @@ jobs:
 
   sweep_step:
     name: sweep_job
-    display_name: sweep-job  # Hint: Provide the display name for the job
+    display_name: sweep-job
     type: sweep
     inputs:
       train_data: ${{parent.jobs.prep_data.outputs.train_data}}
@@ -49,15 +46,15 @@ jobs:
     outputs:
       model_output:
         type: mlflow_model
-    sampling_algorithm: random  # Specify the sampling algorithm
-    trial: ./train.yml  # Refers to a separate command component
+    sampling_algorithm: random
+    trial: ./train.yml
     search_space:
       n_estimators:
         type: choice
         values: [10, 20, 30, 50]
       max_depth:
-        type: choice  # Specify the type for max_depth
-        values: [3, 5, 7]  # Provide the values for max_depth
+        type: choice
+        values: [3, 5, 7]
     objective:
       goal: minimize
       primary_metric: MSE
@@ -66,15 +63,14 @@ jobs:
       max_concurrent_trials: 10
       timeout: 7200
 
-
   register_model:
-    name: register_model  # Provide the job name
-    display_name: register-model  # Provide the display name for the job
+    name: register_model
+    display_name: register-model
     code: ../../../data-science/src
     command: >-
-      python register.py 
-      --model_name ${{inputs.model_name}} 
-      --model_path ${{inputs.model_path}} 
+      python register.py
+      --model_name ${{inputs.model_name}}
+      --model_path ${{inputs.model_path}}
       --model_info_output_path ${{outputs.model_info_output_path}}
     environment: azureml:used-cars-train-env@latest
     inputs:
